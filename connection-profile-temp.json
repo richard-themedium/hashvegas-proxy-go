@@ -1,0 +1,111 @@
+{
+  "client": {
+    "logging": {
+      "level": "info"
+    },
+    "cryptoconfig": {
+      "path": "${MSP_CONFIG_PATH}"
+    }
+  },
+  "channels": {
+    "hashvegas": {
+      "peers": {
+        "org1-peer0": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "org2-peer0": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "organizations": {
+    "Org1": {
+      "mspid": "Org1MSP",
+      "cryptoPath": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp",
+      "peers": [
+        "peer0.org1.example.com"
+      ],
+      "certificateAuthorities": [
+        "ca-org1"
+      ],
+      "adminPrivateKey": {
+        "path": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/keystore/priv_sk"
+      },
+      "signedCert": {
+        "path": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/signcerts/peer0.org1.example.com-cert.pem"
+      }
+    },
+    "Org2": {
+      "mspid": "Org2MSP",
+      "cryptoPath": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp",
+      "peers": [
+        "peer0.org2.example.com"
+      ],
+      "certificateAuthorities": [
+        "ca-org2"
+      ],
+      "adminPrivateKey": {
+        "path": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/keystore/priv_sk"
+      },
+      "signedCert": {
+        "path": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/signcerts/peer0.org2.example.com-cert.pem"
+      }
+    }
+  },
+  "orderers": {
+    "orderer1": {
+      "url": "grpcs://orderer1:7050",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer1",
+        "hostnameOverride": "orderer1",
+        "keep-alive-time": "0s",
+        "keep-alive-timeout": "120s",
+        "keep-alive-permit": false,
+        "fail-fast": false,
+        "allow-insecure": false
+      },
+      "tlsCACerts": {
+        "path": "${MSP_CONFIG_PATH}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+      }
+    }
+  },
+  "peers": {
+    "org1-peer1": {
+      "url": "grpcs://localhost:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "org1-peer0",
+        "keep-alive-time": "0s",
+        "keep-alive-timeout": "120s",
+        "keep-alive-permit": false,
+        "fail-fast": false,
+        "allow-insecure": false
+      },
+      "tlsCACerts": {
+        "path": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
+      }
+    },
+    "org2-peer1": {
+      "url": "grpcs://localhost:7052",
+      "grpcOptions": {
+        "ssl-target-name-override": "org2-peer0",
+        "keep-alive-time": "0s",
+        "keep-alive-timeout": "120s",
+        "keep-alive-permit": false,
+        "fail-fast": false,
+        "allow-insecure": false
+      },
+      "tlsCACerts": {
+        "path": "${MSP_CONFIG_PATH}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"
+      }
+    }
+  }
+}
+
+
